@@ -5,7 +5,7 @@ from glob import glob
 from pymongo import MongoClient
 import uuid
 # Create connection to MongoDB
-client = MongoClient('mongodb+srv://dbDamisa:<damisa.25>@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
 
 db = client.db
 collection = db.invertedIndex_db
@@ -42,7 +42,7 @@ def parsetexts(fileglob='Songs/T*.txt'):
     for txtfile in glob(fileglob):
         with open(txtfile, 'r') as f:
             txt = word_tokenize(f.read())
-            txt = [stemmer.stem(element).lower() for element in txt if not element in stop_word] 
+            txt = [stemmer.stem(element).lower() for element in txt if not element in stop_word and '.' not in element] 
             words |= set(txt) #words appear in all files
             texts[txtfile.split('/')[-1]] = txt #words in each text file
     return texts, words
@@ -68,8 +68,7 @@ try:
     collection.insert_one(index_dict)
 except:
     print('This connect or insert is wrong')
-#result = collection.insert_one(index_dict)
-#print(result)
+
 
 """ Searching key in inverted index """
 def termsearch(terms): # Searches simple inverted index
