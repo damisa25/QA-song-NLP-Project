@@ -25,7 +25,7 @@ else:
     ssl._create_default_https_context = _create_unverified_https_context
 
 nltk.download('stopwords')
-from nltk.tokenize import word_tokenize 
+from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 
@@ -39,7 +39,7 @@ stop_word = set(stopwords.words('english'))
 stemmer = SnowballStemmer("english")
 
 """Tokenization, Stop words removal, Stemming """
-def parsetexts(fileglob='Songs/T*.txt'):
+def parsetexts(fileglob='Songs/T*.txt'): #T1.txt-T20.txt
     docs, words = {}, set()
     #Extract words from txt
     for txtfile in glob(fileglob):
@@ -55,7 +55,7 @@ words = dict.fromkeys(words, 0)  #
 
 """ Index term dictionary """
 def inverted_index_dict(docs,words):
-    inverted_index = {}  
+    inverted_index = {}
     for word in words:
         for txt, wrds in docs.items():
             if word in wrds:
@@ -65,7 +65,7 @@ def inverted_index_dict(docs,words):
 inverted_index = inverted_index_dict(docs,words)
 
 """ Inserting into MongoDB"""
-try:   
+try:
     docs_col.insert_one(docs)
     words_col.insert_one(words)
     inverted_col.insert_one(inverted_index)
