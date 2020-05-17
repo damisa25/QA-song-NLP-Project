@@ -13,7 +13,6 @@ docs_col = db.docs_db
 words_col = db.words
 inverted_col = db.invertedIndex_db
 
-
 import nltk
 import ssl
 
@@ -51,7 +50,7 @@ def parsetexts(fileglob='Songs/T*.txt'): #T1.txt-T20.txt
     return docs, words
 
 docs, words = parsetexts()
-words = dict.fromkeys(words, 0)  #
+words = dict.fromkeys(words, 0)
 
 """ Index term dictionary """
 def inverted_index_dict(docs,words):
