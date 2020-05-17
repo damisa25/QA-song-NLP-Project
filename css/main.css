@@ -4,6 +4,12 @@
   background: #FFDFD3 50%;
 }
 
+/* .background {
+  background-image: url(https://www.xmple.com/wallpaper/pink-blue-gradient-linear-1920x1080-c2-87cefa-ffb6c1-a-285-f-14.svg);
+  width: 100%;
+  min-height: 100vh;
+} */
+
 .navbar {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -53,10 +59,13 @@
   margin-top: 8px;
   background: #a890fe;
   border-radius: 15px;
-  
   font-size: 14px;
   border: none;
   cursor: pointer;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .ask:hover {
@@ -72,6 +81,10 @@
   font-size: 14px;
   border: none;
   cursor: pointer;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .reset:hover {
