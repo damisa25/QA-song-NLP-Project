@@ -9,10 +9,10 @@ else:
     ssl._create_default_https_context = _create_unverified_https_context
 
 nltk.download('stopwords')
-from nltk.tokenize import word_tokenize 
-from nltk.corpus import stopwords
-from nltk.stem.snowball import SnowballStemmer
-from collections import defaultdict
+from nltk.tokenize import word_tokenize #divide strings into lists of substrings
+from nltk.corpus import stopwords #stopwords corpus
+from nltk.stem.snowball import SnowballStemmer #An algorithm for suffix stripping
+from collections import defaultdict #takes no arguments and provides the default value for a nonexistent key
 
 try: reduce
 except: from functools import reduce
@@ -29,8 +29,8 @@ docs_col = db.docs_db
 words_col = db.words
 inverted_col = db.invertedIndex_db
 
-stop_word = set(stopwords.words('english'))
-stemmer = SnowballStemmer("english")
+stop_word = set(stopwords.words('english')) #generate the most recent English stopword list
+stemmer = SnowballStemmer("english") #Stemmers remove morphological affixes from words, leaving only the word stem.
 
 question = "Who is the songwriter of Yummy song?" #Example
 
@@ -74,6 +74,3 @@ def matchedkeywords(terms): # Searches full inverted index
 
 print('\nTerm Search for: ' + repr(extracted_keywords))
 print(sorted(matchedkeywords(extracted_keywords)))
-
-
-
