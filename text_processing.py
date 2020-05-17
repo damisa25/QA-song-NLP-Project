@@ -1,6 +1,7 @@
 """ Part 1 : text processing by doing inverted index dictionary"""
 from pprint import pprint as pp
 from glob import glob
+from collections import Counter
 
 from pymongo import MongoClient
 import uuid
@@ -8,7 +9,9 @@ import uuid
 client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
 
 db = client.db
-collection = db.invertedIndex_db
+docs_col = db.docs_db
+words_col = db.words
+inverted_col = db.invertedIndex_db
 
 
 import nltk
@@ -37,51 +40,33 @@ stemmer = SnowballStemmer("english")
 
 """Tokenization, Stop words removal, Stemming """
 def parsetexts(fileglob='Songs/T*.txt'):
-    texts, words = {}, set()
+    docs, words = {}, set()
     #Extract words from txt
     for txtfile in glob(fileglob):
         with open(txtfile, 'r') as f:
             txt = word_tokenize(f.read())
             txt = [stemmer.stem(element).lower() for element in txt if not element in stop_word and '.' not in element] 
             words |= set(txt) #words appear in all files
-            texts[txtfile.split('/')[-1]] = txt #words in each text file
-    return texts, words
+            docs[txtfile.split('/')[-1].replace('.txt', '')] = txt #words in each text file
+    return docs, words
 
-texts, words = parsetexts()
-print('\nTexts')
-pp(texts)
-print('\nWords')
-pp(sorted(words))
+docs, words = parsetexts()
+words = dict.fromkeys(words, 0)  #
 
 """ Index term dictionary """
-index_dict = {}  
-for word in words:
-    for txt, wrds in texts.items():
-        if word in wrds:
-            index_dict.setdefault(word, []).append(txt)
+def inverted_index_dict(docs,words):
+    inverted_index = {}  
+    for word in words:
+        for txt, wrds in docs.items():
+            if word in wrds:
+                inverted_index.setdefault(word, []).append(txt)
+    return inverted_index
 
+inverted_index = inverted_index_dict(docs,words)
 
-print('\nInverted Index')
-pp(index_dict)
-
-try:
-    collection.insert_one(index_dict)
-except:
-    print('This connect or insert is wrong')
-
-
-""" Searching key in inverted index """
-def termsearch(terms): # Searches simple inverted index
-        try:
-            for term in terms:
-                index_dict[term]
-                x = sorted(set(texts.keys()))
-            return x    #key exists in dictionary
-        except KeyError:
-            return sorted(set(texts.keys()))    #key doesn't exists in dictionary
-
-
-terms = [ "singer", "record","sasha"]
-terms = [element.lower() for element in terms] 
-print('\nTerm Search for: ' + repr(terms))
-pp(termsearch(terms))
+""" Inserting into MongoDB"""
+try:   
+    docs_col.insert_one(docs)
+    words_col.insert_one(words)
+    inverted_col.insert_one(inverted_index)
+except: print('This connect or insert is wrong')
