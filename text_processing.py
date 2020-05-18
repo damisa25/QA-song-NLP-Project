@@ -62,11 +62,11 @@ def inverted_index_dict(docs,words):
         for txt, wrds in docs.items():
             for wrdindx in (i for i,w in enumerate(wrds) if word==w):
                 if word in wrds:
-                    inverted_index.update({word : [(txt, wrdindx)]})
+                    inverted_index.setdefault(word, []).append((txt, wrdindx))
     return inverted_index
 
 inverted_index = inverted_index_dict(docs,words)
-
+pp(inverted_index)
 """ Inserting into MongoDB """
 try:   
     docs_col.insert_one(docs)
