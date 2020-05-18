@@ -10,11 +10,12 @@ client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/tes
 
 db = client.db
 docs_col = db.docs_db
-words_col = db.words
+words_col = db.words_db
 inverted_col = db.invertedIndex_db
 
 
 import nltk
+import re
 import ssl
 
 try:
@@ -38,16 +39,17 @@ except: raw_input = input
 stop_word = set(stopwords.words('english'))
 stemmer = SnowballStemmer("english")
 
-"""Tokenization, Stop words removal, Stemming """
+"""Tokenization, Normalization, Stemming """
 def parsetexts(fileglob='Songs/T*.txt'):
     docs, words = {}, set()
     #Extract words from txt
     for txtfile in glob(fileglob):
         with open(txtfile, 'r') as f:
-            txt = word_tokenize(f.read())
+            txt = word_tokenize(f.read())   # Word tokenization
+            """Stop word removal, Lowercase, Stemming"""
             txt = [stemmer.stem(element).lower() for element in txt if not element in stop_word and '.' not in element] 
-            words |= set(txt) #words appear in all files
-            docs[txtfile.split('/')[-1].replace('.txt', '')] = txt #words in each text file
+            words |= set(txt) #Words appear in all files
+            docs[txtfile.split('/')[-1].replace('.txt', '')] = txt #Words in each text file
     return docs, words
 
 docs, words = parsetexts()
@@ -58,13 +60,14 @@ def inverted_index_dict(docs,words):
     inverted_index = {}  
     for word in words:
         for txt, wrds in docs.items():
-            if word in wrds:
-                inverted_index.setdefault(word, []).append(txt)
+            for wrdindx in (i for i,w in enumerate(wrds) if word==w):
+                if word in wrds:
+                    inverted_index.update({word : [(txt, wrdindx)]})
     return inverted_index
 
 inverted_index = inverted_index_dict(docs,words)
 
-""" Inserting into MongoDB"""
+""" Inserting into MongoDB """
 try:   
     docs_col.insert_one(docs)
     words_col.insert_one(words)
