@@ -66,9 +66,9 @@ def inverted_index_dict(docs,words):
     return inverted_index
 
 inverted_index = inverted_index_dict(docs,words)
-pp(inverted_index)
+
 """ Inserting into MongoDB """
-try:   
+try:    
     docs_col.insert_one(docs)
     words_col.insert_one(words)
     inverted_col.insert_one(inverted_index)
