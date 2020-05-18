@@ -68,7 +68,6 @@ inverted_index = {}
 for index in inverted_col.find({},{"_id":0}):
         inverted_index.update(index)
 
-pp(inverted_index)
 
 terms = [ term for term in extracted_keywords if term in words]
 
@@ -89,14 +88,26 @@ print(relevant_docs)
 """ File Reranking : find out between query keywords and all text files
                      Using Jaccard Similarity function"""
 def jaccard_similarity(extractedWords, fileWords):
-    words_query = set(list1)
-    words_file = set(list2)
+    words_query = set(extractedWords)
+    words_file = set(fileWords)
     score = len(words_query.intersection(words_file)) / len(words_query.union(words_file))
     return score
 
-list1 = ['dog', 'cat', 'cat', 'rat']
-list2 = ['dog', 'cat', 'mouse']
-print(jaccard_similarity(list1, list2))
+def file_reranking(extractedWords, relevant_docs):
+    pp(extractedWords)
+    words_in_file= []
+    score = []
+    score_doc = []
+    for doc in relevant_docs:
+        for key, value in docs.items():
+            if key == doc:
+                words_in_file = value
+                score_doc.append(key)
+                score.append(jaccard_similarity(extractedWords, words_in_file))
+    max_score_file = max(zip(score,score_doc))
+    return max_score_file[1]
 
+
+pp(file_reranking(terms, relevant_docs)) 
 
 
