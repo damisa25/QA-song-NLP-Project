@@ -1,4 +1,5 @@
 import nltk
+import spacy
 import ssl
 from pprint import pprint as pp
 
@@ -12,8 +13,9 @@ else:
 nltk.download('stopwords')
 from nltk.tokenize import word_tokenize 
 from nltk.corpus import stopwords
-from nltk.stem.snowball import SnowballStemmer
+from nltk.stem import WordNetLemmatizer
 from collections import defaultdict
+#from collections import defaultdict
 
 try: reduce
 except: from functools import reduce
@@ -31,25 +33,31 @@ words_col = db.words_db
 inverted_col = db.invertedIndex_db
 
 stop_word = set(stopwords.words('english'))
-stemmer = SnowballStemmer("english")
+lemmatizer = WordNetLemmatizer()
+q_words = ['What', 'Where', 'When', 'Who', 'Why', 'How','what', 'where', 'when', 'who', 'why', 'how']
 
-question = "Who is the songwriter of Yummy song?" #Example
-
-print(question)
+question = "Who is the songwriter of Yummy?" #Example
 
 """ Extract keywords : tokenization, POS-tagging, stop word removal, stemming"""
 def extract_keys(question):
-    tokens = word_tokenize(question)
-    pos_tagging = nltk.pos_tag(tokens)
-    pos_tagging = [(element[0].lower(),element[1]) for element in pos_tagging]
-    pos_tagging = [(stemmer.stem(element[0]), element[1]) for element in pos_tagging if element[0] not in stop_word and '?' not in element[0] and ',' not in element[0]]
-    print(pos_tagging)
-    extracted_keywords = [element[0] for element in pos_tagging]
-    print(extracted_keywords)
-    return extracted_keywords
+    """ Keywords """
+    tokens_keywords = word_tokenize(question)
+    extracted_keywords = [lemmatizer.lemmatize(element).lower() for element in tokens_keywords 
+                            if element not in stop_word and '?' not in element and ',' not in element and element not in q_words] 
 
-extracted_keywords = extract_keys(question)
+    """ POS tagging answer """
+    pos_question = defaultdict(list)
+    for value, tag in nltk.pos_tag(extracted_keywords, tagset='universal'):
+        pos_question[tag].append(value)
 
+    return extracted_keywords, dict(pos_question)
+    
+
+extracted_keywords, pos_question = extract_keys(question)
+pp(extracted_keywords)
+pp(pos_question)
+
+   
 """ Document Retrieval : matching keywords  from question with words from MongoDB"""
 #Query words from mongoDB
 words = {}
@@ -85,7 +93,7 @@ print('\nTerm Search for: ' + repr(terms))
 relevant_docs = sorted(matchedkeywords(terms))
 print(relevant_docs)
 
-""" File Reranking : find out between query keywords and all text files
+"""File Reranking : find out between query keywords and all text files
                      Using Jaccard Similarity function"""
 def jaccard_similarity(extractedWords, fileWords):
     words_query = set(extractedWords)
@@ -107,7 +115,7 @@ def file_reranking(extractedWords, relevant_docs):
     max_score_file = max(zip(score,score_doc))
     return max_score_file[1]
 
-
-pp(file_reranking(terms, relevant_docs)) 
+extract_file = file_reranking(terms, relevant_docs)
+pp(extract_file) 
 
 
