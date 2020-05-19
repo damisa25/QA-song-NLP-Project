@@ -1,10 +1,22 @@
 """ Part 1 : text processing by doing inverted index dictionary"""
+import nltk
+import re
+import ssl
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+import uuid
 from pprint import pprint as pp
 from glob import glob
 from collections import Counter
-
+from nltk.tokenize import word_tokenize 
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 from pymongo import MongoClient
-import uuid
+
 # Create connection to MongoDB
 client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
 
@@ -14,28 +26,8 @@ words_col = db.words_db
 inverted_col = db.invertedIndex_db
 
 
-import nltk
-import re
-import ssl
-
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context
 
 nltk.download('stopwords')
-from nltk.tokenize import word_tokenize 
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-
-try: reduce
-except: from functools import reduce
-try:    raw_input
-except: raw_input = input
-
-
 stop_word = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
@@ -68,7 +60,9 @@ def inverted_index_dict(docs,words):
 inverted_index = inverted_index_dict(docs,words)
 
 """ Inserting into MongoDB """
+
 try:    
+    
     docs_col.insert_one(docs)
     words_col.insert_one(words)
     inverted_col.insert_one(inverted_index)
