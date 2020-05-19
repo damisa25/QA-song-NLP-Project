@@ -25,7 +25,6 @@
     top: 44px;
 }
 
-
 .navbar-name {
     /* Song Question Answering */
     position: absolute;
@@ -33,28 +32,14 @@
     left: 120px;
     text-align: center;
     top: 31px;
-
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 36px;
-    /* identical to box height */
-
-
     color: #545772;
     }
 
-.navbar {
-    padding-top     : 10px;
-    padding-bottom  : 10px;
-    padding-right   : 120px;
-    border          : 0;
-    border-radius   : 0;
-    margin-bottom   : 45;
-    font-size       : 12px;
-    letter-spacing  : 5px;
-  }
 
 .margin {
     /* margin-bottom   : 45px;
@@ -112,7 +97,7 @@
     border            : 0px;
     background-color  : #f3dcfb;
     background-image  : linear-gradient(to bottom right, #f3dcfb, #679fe4);
-    padding           : 25px; 
+    padding           : 25px;
     width             : 620px;
     height            : 10px; */
 
