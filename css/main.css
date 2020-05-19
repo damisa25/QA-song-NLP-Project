@@ -1,5 +1,3 @@
-
-
 .background{
     /* width       : 100%;
     min-height  : 100vh; */
@@ -45,42 +43,90 @@
     background-image  : linear-gradient(to bottom right, #f3dcfb, #679fe4);
     padding           : 25px; 
     width             : 620px;
-    height            : 10px;    
+    height            : 10px;
   }
 
 .search-container {
         float   : center;
       }
+
 .ask {
-    
-        float           : center;
+
+        /* float           : center;
         padding         : 10px;
         margin-top      : 8px;
         background      : #a890fe;
         border-radius   : 15px;
         font-size       : 14px;
         border          : none;
-        cursor          : pointer;
+        cursor          : pointer; */
+
+        /* SEARCH */
+        position: absolute;
+        width: 70px;
+        height: 27px;
+        left: 632px;
+        top: 394px;
+
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+
+        text-align: center;
+
+        color: #FFFFFF;
     }
-      
+
 .ask:hover {
-        background  : #7763c0;
+        background  : #eee0ff; /*แก้เพิ่ม*/
       }
 
 .reset {
-    
-        float           : center;
+        /* float           : center;
         padding         : 10px;
         margin-top      : 8px;
         background      : #679fe4;
         border-radius   : 15px;
         font-size       : 14px;
         border          : none;
-        cursor          : pointer;
+        cursor          : pointer; */
+
+        /* RESET */
+        position: absolute;
+        width: 50px;
+        height: 27px;
+        left: 770px;
+        top: 394px;
+
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+
+        text-align: center;
+
+        color: rgba(104, 102, 200, 0.8);
+
+        /* Rectangle*/
+        position: absolute;
+        width: 115px;
+        height: 35px;
+        left: 737px;
+        top: 390px;
+
+        background: #F9F3EC;
+        border: 1px solid rgba(104, 102, 200, 0.8);
+        box-sizing: border-box;
+        border-radius: 20px;
     }
-      
+
 .reset:hover {
-        background  : #4171ac;
+        background  : #eee0ff; /*แก้เพิ่ม*/
       }
 
 .answer{
