@@ -11,7 +11,7 @@
     min-height  : 100vh; */
     /* background  :  #FFDFD3 50%; */
     position: relative;
-    width: 2000px; /*1440*/
+    width: 1930px; /*1440*/
     height: 495px;
     left: 0px;
     top: 0px;
@@ -136,41 +136,26 @@
 
 
 .ask {
-
-        /* float           : center;
-        padding         : 10px;
-        margin-top      : 8px;
-        background      : #a890fe;
-        border-radius   : 15px;
-        font-size       : 14px;
-        border          : none;
-        cursor          : pointer; */
-
         /* SEARCH */
-        position: absolute;
+        /* position: absolute;
         width: 70px;
         height: 27px;
         left: 632px;
-        top: 394px;
-
+        top: 394px; */
+        float: center;
+        margin-top: 98px;
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
         font-size: 18px;
-        line-height: 27px;
-        /* identical to box height */
-
         text-align: center;
-
         color: #FFFFFF;
 
         /* Rectangle 5 */
-        position: absolute;
         width: 115px;
         height: 35px;
         left: 609px;
         top: 390px;
-
         background: rgba(104, 102, 200, 0.7);
         border: 5px solid rgba(150, 149, 210, 0.2);
         border-radius: 20px;
@@ -181,13 +166,11 @@
       }
 
 .search-container {
-  /* float   : center; */
-
   /* Rectangle 4 */
   position: absolute;
   width: 892px;
   height: 64px;
-  left: 530px; /*274*/
+  left: 540px; /*274*/
   top: 303px;
 
   background: #FFFFFF;
@@ -200,7 +183,7 @@
   position: absolute;
   width: 41px;
   height: 41px;
-  left: 560px; /*316*/
+  left: 565px; /*316*/
   top: 314px;
 }
 
@@ -215,11 +198,8 @@
         cursor          : pointer; */
 
         /* RESET */
-        position: absolute;
-        width: 50px;
-        height: 27px;
-        left: 770px;
-        top: 394px;
+        float: center;
+        margin-top: -288px;
 
         font-family: Poppins;
         font-style: normal;
@@ -229,6 +209,7 @@
         /* identical to box height */
 
         text-align: center;
+        cursor: pointer;
 
         color: rgba(104, 102, 200, 0.8);
 
