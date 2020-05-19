@@ -5,12 +5,22 @@
   height: 1024px; */
   background: #FFFFFF;
 }
+@media screen and (max-width: 600px) {
+  .background {
+  width: 150px;
+  height: 60px;
+  margin: 0 auto;
+  }
+  }
 .background{
     /* width       : 100%;
     min-height  : 100vh; */
     /* background  :  #FFDFD3 50%; */
-    position: relative;
-    width: 1930px; /*1440*/
+    background-size: 100%;
+    margin: 0;
+    /* position: relative; */
+    /*1440*/
+    width: 1930px;
     height: 495px;
     left: 0px;
     top: 0px;
