@@ -5,13 +5,7 @@
   height: 1024px; */
   background: #FFFFFF;
 }
-@media screen and (max-width: 600px) {
-  .background {
-  width: 150px;
-  height: 60px;
-  margin: 0 auto;
-  }
-  }
+
 .background{
     /* width       : 100%;
     min-height  : 100vh; */
