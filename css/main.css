@@ -1,9 +1,8 @@
 .desktop {
   /* Desktop */
-  position: relative;
+  /* position: relative;
   width: 1440px;
-  height: 1024px;
-
+  height: 1024px; */
   background: #FFFFFF;
 }
 .background{
@@ -26,13 +25,14 @@
     top: 44px;
 }
 
+
 .navbar-name {
     /* Song Question Answering */
     position: absolute;
     width: 314px;
-    height: 36px;
-    left: 190px;
-    top: 54px;
+    left: 120px;
+    text-align: center;
+    top: 31px;
 
     font-family: Poppins;
     font-style: normal;
@@ -242,22 +242,17 @@
     margin-left         : 275px; */
 
     /* ANSWER */
-    position: absolute;
-    width: 101px;
-    height: 36px;
-    left: 669px;
-    top: 588px;
-
+    float: center;
+    text-align: center;
+    color: #9F92BA;
     font-family: Poppins;
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
     line-height: 36px;
-    /* identical to box height */
 
-    text-align: center;
-
-    color: #9F92BA;
+    /* margin-top: 30px;*/
+    margin-left: 264px;
 
     /* Rectangle 8 */
     position: absolute;
@@ -265,8 +260,7 @@
     height: 421px;
     left: 180px;
     top: 555px;
-
-    background: rgba(186, 186, 211, 0.14);
+    background: rgba(210, 209, 236, 0.18);
     border-radius: 30px;
 
 }
