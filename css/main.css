@@ -78,6 +78,17 @@
         text-align: center;
 
         color: #FFFFFF;
+
+        /* Rectangle 5 */
+        position: absolute;
+        width: 115px;
+        height: 35px;
+        left: 609px;
+        top: 390px;
+
+        background: rgba(104, 102, 200, 0.7);
+        border: 5px solid rgba(150, 149, 210, 0.2);
+        border-radius: 20px;
     }
 
 .ask:hover {
@@ -112,7 +123,7 @@
 
         color: rgba(104, 102, 200, 0.8);
 
-        /* Rectangle*/
+        /* Rectangle6*/
         position: absolute;
         width: 115px;
         height: 35px;
