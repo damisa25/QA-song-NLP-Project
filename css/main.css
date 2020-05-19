@@ -1,9 +1,17 @@
+.desktop {
+  /* Desktop */
+  position: relative;
+  width: 1440px;
+  height: 1024px;
+
+  background: #FFFFFF;
+}
 .background{
     /* width       : 100%;
     min-height  : 100vh; */
     /* background  :  #FFDFD3 50%; */
-    position: absolute;
-    width: 1440px;
+    position: relative;
+    width: 2000px; /*1440*/
     height: 495px;
     left: 0px;
     top: 0px;
@@ -21,17 +29,18 @@
 .navbar-name {
     /* Song Question Answering */
     position: absolute;
-    width: 310px;
+    width: 314px;
     height: 36px;
     left: 190px;
     top: 54px;
 
     font-family: Poppins;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 24px;
     line-height: 36px;
     /* identical to box height */
+
 
     color: #545772;
     }
@@ -55,7 +64,7 @@
     position: absolute;
     width: 669px;
     height: 36px;
-    left: 378px;
+    left: 650px; /*378*/
     top: 143px;
 
     font-family: Poppins;
@@ -73,7 +82,7 @@
     position: absolute;
     width: 796px;
     height: 54px;
-    left: 322px;
+    left: 580px; /*322*/
     top: 206px;
 
     font-family: Poppins;
@@ -89,10 +98,12 @@
     font    : 20px Montserrat, sans-serif;
     color   : #5b247a;
   }
-.container-fluid {
+
+/* .container-fluid {
     padding-top     : 70px;
     padding-bottom  : 70px;
-  }
+  } */
+
 .question {
     /* color             : #ffffff;
     font-size         : 14px;
@@ -123,28 +134,6 @@
     color: #C0C0C0;
   }
 
-.search-container {
-        /* float   : center; */
-
-        /* Rectangle 4 */
-    position: absolute;
-    width: 892px;
-    height: 64px;
-    left: 274px;
-    top: 303px;
-
-    background: #FFFFFF;
-    border-radius: 30px;
-  }
-
-.search-img {
-   /* ion:search */
-   position: absolute;
-   width: 41px;
-   height: 41px;
-   left: 316px;
-   top: 314px;
-}
 
 .ask {
 
@@ -190,6 +179,30 @@
 .ask:hover {
         background  : #eee0ff; /*แก้เพิ่ม*/
       }
+
+.search-container {
+  /* float   : center; */
+
+  /* Rectangle 4 */
+  position: absolute;
+  width: 892px;
+  height: 64px;
+  left: 530px; /*274*/
+  top: 303px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+
+.search-img {
+  /* ion:search */
+  position: absolute;
+  width: 41px;
+  height: 41px;
+  left: 560px; /*316*/
+  top: 314px;
+}
 
 .reset {
         /* float           : center;
@@ -276,12 +289,3 @@
     border-radius: 30px;
 
 }
-
-/* .background-2 {
-  /* Desktop - 1 */
-  position: relative;
-  width: 1440px;
-  height: 1024px;
-
-  background: #FFFFFF;
-} */
