@@ -9,6 +9,31 @@
     top: 0px;
     background: linear-gradient(180deg, #C6D2E3 0%, rgba(230, 235, 243, 0.442708) 71.35%, rgba(255, 255, 255, 0) 100%), rgba(228, 177, 100, 0.15);
 }
+.navbar-header {
+    position: absolute;
+    width: 72px;
+    height: 71px;
+    left: 102px;
+    top: 44px;
+}
+
+.navbar-name {
+    /* Song Question Answering */
+    position: absolute;
+    width: 310px;
+    height: 36px;
+    left: 190px;
+    top: 54px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height */
+
+    color: #545772;
+    }
 
 .navbar {
     padding-top     : 10px;
@@ -22,8 +47,26 @@
   }
 
   .margin {
-    margin-bottom   : 45px;
-    font-weight     : bold;
+    /* margin-bottom   : 45px;
+    font-weight     : bold; */
+
+    /* Let’s ask some questions about your interesting songs ! */
+    position: absolute;
+    width: 669px;
+    height: 36px;
+    left: 378px;
+    top: 143px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: rgba(104, 102, 200, 0.8);
     }
   .bg-1 {
     font    : 20px Montserrat, sans-serif;
