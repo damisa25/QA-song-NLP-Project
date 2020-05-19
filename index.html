@@ -3,7 +3,7 @@
 <head>
   <title>SongQuestionAnswering</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1"s>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -36,10 +36,46 @@
                 <h4 class="margin2">Song Question and Answering is the system that collects all data about English songs.
                     You can type something !  is the system that collects all data abodakaaut English solda.</h4>
             <!-- </div> -->
+            <script>
+                // alert("Welcome!")
+            //     body.mobile div#logo {
+            //     text-align: center;
+            // }
+            //     body.desktop div#logo {
+            //     text-align: left;
+            //   }
+                var today = new Date();
+                var hourNow = today.getHours();
+                var greeting;
+                var icon;
+
+                if (hourNow < 12){
+                greeting = "Good Morning";
+                alert("Good Morning")
+                }
+                else if (hourNow < 20){
+                greeting = 'Good afternoon!';
+                alert("Good Afternoon")
+                }
+                else if (hourNow < 24){
+                greeting = "Good evening"
+                alert("Good Evening")
+                }
+                else {
+                greeting = "Welcome";
+                }
+                document.getElementById("col-1").innerHTML = "<h3>" + greeting + " </h1>";
+                document.getElementById("icon").innerHTML = ('<i class="fa fa-' + icon + '" aria-hidden="true"></i>');
+
+                window.onbeforeunload = confirmExit;
+                function confirmExit()
+                {
+                    return "See you again";
+                }
+            </script>
         </div>
         <div class="background-2"></div>
 
-        
     </div>  
     <div class="search-container">
         <form action="/action_page.php">
