@@ -126,13 +126,12 @@
 
 .ask {
         /* SEARCH */
-        /* position: absolute;
-        width: 70px;
-        height: 27px;
-        left: 632px;
-        top: 394px; */
+        /* position: absolute;*/
         float: center;
         margin-top: 98px;
+        /* position: absolute;
+        top: 30px;
+        left: 20px; */
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
@@ -160,7 +159,7 @@
   width: 892px;
   height: 64px;
   left: 540px; /*274*/
-  top: 303px;
+  top: 320px;
 
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
@@ -173,7 +172,7 @@
   width: 41px;
   height: 41px;
   left: 565px; /*316*/
-  top: 314px;
+  top: 328px;
 }
 
 .reset {
@@ -188,16 +187,16 @@
 
         /* RESET */
         float: center;
-        margin-top: -288px;
-
+        text-align: center;
+        
+        position: absolute;
+        margin-top: -300px;
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
         font-size: 18px;
         line-height: 27px;
         /* identical to box height */
-
-        text-align: center;
         cursor: pointer;
 
         color: rgba(104, 102, 200, 0.8);
@@ -233,6 +232,8 @@
     /* ANSWER */
     float: center;
     text-align: center;
+    /* position: absolute;
+    margin-top: -300px; */
     color: #9F92BA;
     font-family: Poppins;
     font-style: normal;
