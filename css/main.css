@@ -10,7 +10,6 @@
     background: linear-gradient(180deg, #C6D2E3 0%, rgba(230, 235, 243, 0.442708) 71.35%, rgba(255, 255, 255, 0) 100%), rgba(228, 177, 100, 0.15);
 }
 
-
 .navbar-header {
     position: absolute;
     width: 72px;
@@ -95,7 +94,7 @@
     padding-bottom  : 70px;
   }
 .question {
-    color             : #ffffff;
+    /* color             : #ffffff;
     font-size         : 14px;
     margin-right      : 10px;
     border-radius     : 70px;
@@ -104,12 +103,48 @@
     background-image  : linear-gradient(to bottom right, #f3dcfb, #679fe4);
     padding           : 25px; 
     width             : 620px;
-    height            : 10px;
+    height            : 10px; */
+
+    position: absolute;
+    width: 260px;
+    height: 30px;
+    left: 378px;
+    top: 320px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #C0C0C0;
   }
 
 .search-container {
-        float   : center;
-      }
+        /* float   : center; */
+
+        /* Rectangle 4 */
+    position: absolute;
+    width: 892px;
+    height: 64px;
+    left: 274px;
+    top: 303px;
+
+    background: #FFFFFF;
+    border-radius: 30px;
+  }
+
+.search-img {
+   /* ion:search */
+   position: absolute;
+   width: 41px;
+   height: 41px;
+   left: 316px;
+   top: 314px;
+}
 
 .ask {
 
