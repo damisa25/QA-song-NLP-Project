@@ -1,9 +1,15 @@
 
 
 .background{
-    width       : 100%;  
-    min-height  : 100vh;
-    background  :  #FFDFD3 50%;
+    /* width       : 100%;
+    min-height  : 100vh; */
+    /* background  :  #FFDFD3 50%; */
+    position: absolute;
+    width: 1440px;
+    height: 495px;
+    left: 0px;
+    top: 0px;
+    background: linear-gradient(180deg, #C6D2E3 0%, rgba(230, 235, 243, 0.442708) 71.35%, rgba(255, 255, 255, 0) 100%), rgba(228, 177, 100, 0.15);
 }
 
 .navbar {
@@ -21,7 +27,7 @@
     margin-bottom   : 45px;
     font-weight     : bold;
     }
-  .bg-1 { 
+  .bg-1 {
     font    : 20px Montserrat, sans-serif;
     color   : #5b247a;
   }
