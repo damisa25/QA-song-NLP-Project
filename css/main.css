@@ -9,6 +9,8 @@
     top: 0px;
     background: linear-gradient(180deg, #C6D2E3 0%, rgba(230, 235, 243, 0.442708) 71.35%, rgba(255, 255, 255, 0) 100%), rgba(228, 177, 100, 0.15);
 }
+
+
 .navbar-header {
     position: absolute;
     width: 72px;
@@ -46,7 +48,7 @@
     letter-spacing  : 5px;
   }
 
-  .margin {
+.margin {
     /* margin-bottom   : 45px;
     font-weight     : bold; */
 
@@ -68,15 +70,31 @@
 
     color: rgba(104, 102, 200, 0.8);
     }
-  .bg-1 {
+.margin2 {
+    position: absolute;
+    width: 796px;
+    height: 54px;
+    left: 322px;
+    top: 206px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+
+    color: #5F5F5F;
+}
+.bg-1 {
     font    : 20px Montserrat, sans-serif;
     color   : #5b247a;
   }
-  .container-fluid {
+.container-fluid {
     padding-top     : 70px;
     padding-bottom  : 70px;
   }
-  .question {
+.question {
     color             : #ffffff;
     font-size         : 14px;
     margin-right      : 10px;
@@ -184,7 +202,7 @@
       }
 
 .answer{
-    float               : center;
+    /* float               : center;
     background-color    : #f3dcfb;
     background-image    : linear-gradient(to bottom right, #f3dcfb, #679fe4);
     border-radius       : 15px;
@@ -192,5 +210,43 @@
     height              : 320px; 
     padding             : 50px;
     margin-top          : 30px;
-    margin-left         : 275px;
+    margin-left         : 275px; */
+
+    /* ANSWER */
+    position: absolute;
+    width: 101px;
+    height: 36px;
+    left: 669px;
+    top: 588px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #9F92BA;
+
+    /* Rectangle 8 */
+    position: absolute;
+    width: 1080px;
+    height: 421px;
+    left: 180px;
+    top: 555px;
+
+    background: rgba(186, 186, 211, 0.14);
+    border-radius: 30px;
+
 }
+
+/* .background-2 {
+  /* Desktop - 1 */
+  position: relative;
+  width: 1440px;
+  height: 1024px;
+
+  background: #FFFFFF;
+} */
