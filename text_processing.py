@@ -28,7 +28,7 @@ else:
 nltk.download('stopwords')
 from nltk.tokenize import word_tokenize 
 from nltk.corpus import stopwords
-from nltk.stem.snowball import SnowballStemmer
+from nltk.stem import WordNetLemmatizer
 
 try: reduce
 except: from functools import reduce
@@ -37,7 +37,7 @@ except: raw_input = input
 
 
 stop_word = set(stopwords.words('english'))
-stemmer = SnowballStemmer("english")
+lemmatizer = WordNetLemmatizer()
 
 """Tokenization, Normalization, Stemming """
 def parsetexts(fileglob='Songs/T*.txt'):
@@ -47,7 +47,7 @@ def parsetexts(fileglob='Songs/T*.txt'):
         with open(txtfile, 'r') as f:
             txt = word_tokenize(f.read())   # Word tokenization
             """Stop word removal, Lowercase, Stemming"""
-            txt = [stemmer.stem(element).lower() for element in txt if not element in stop_word and '.' not in element] 
+            txt = [lemmatizer.lemmatize(element).lower() for element in txt if not element in stop_word and '.' not in element] 
             words |= set(txt) #Words appear in all files
             docs[txtfile.split('/')[-1].replace('.txt', '')] = txt #Words in each text file
     return docs, words
