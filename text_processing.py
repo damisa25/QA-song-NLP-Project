@@ -2,12 +2,8 @@
 import nltk
 import re
 import ssl
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context
+import pymongo
+
 import uuid
 from pprint import pprint as pp
 from glob import glob
@@ -17,6 +13,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from pymongo import MongoClient
 
+
 # Create connection to MongoDB
 client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
 
@@ -25,6 +22,12 @@ docs_col = db.docs_db
 words_col = db.words_db
 inverted_col = db.invertedIndex_db
 
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
 
 
 nltk.download('stopwords')
@@ -39,7 +42,9 @@ def parsetexts(fileglob='Songs/T*.txt'):
         with open(txtfile, 'r') as f:
             txt = word_tokenize(f.read())   # Word tokenization
             """Stop word removal, Lowercase, Stemming"""
-            txt = [lemmatizer.lemmatize(element).lower() for element in txt if not element in stop_word and '.' not in element] 
+            txt = [lemmatizer.lemmatize(element).lower() for element in txt if not element in stop_word ] 
+            txt = [re.sub(r'[^\w\s]', '', element) for element in txt]
+            txt = [element for element in txt if element != '']
             words |= set(txt) #Words appear in all files
             docs[txtfile.split('/')[-1].replace('.txt', '')] = txt #Words in each text file
     return docs, words
@@ -58,12 +63,15 @@ def inverted_index_dict(docs,words):
     return inverted_index
 
 inverted_index = inverted_index_dict(docs,words)
+pp(inverted_index)
 
+docs_col.insert_one(docs)
+#
+# words_col.insert_one(words)
 """ Inserting into MongoDB """
 
-try:    
-    
-    docs_col.insert_one(docs)
-    words_col.insert_one(words)
-    inverted_col.insert_one(inverted_index)
-except: print('This connect or insert is wrong')
+   
+"""docs_col.insert_one(docs)
+words_col.insert_one(words)
+inverted_col.insert_one(inverted_index)"""
+#except: print('This connect or insert is wrong')
