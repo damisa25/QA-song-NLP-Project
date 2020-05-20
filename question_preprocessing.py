@@ -64,6 +64,7 @@ def file_reranking(extractedWords, terms, words, docs, inverted_index):
     words_in_file= []
     score = []
     score_doc = []
+    pp(relevant_docs)
     for doc in relevant_docs:
         for key, value in docs.items():
             if key == doc:
@@ -71,7 +72,10 @@ def file_reranking(extractedWords, terms, words, docs, inverted_index):
                 score_doc.append(key)
                 score.append(jaccard_similarity(extractedWords, words_in_file))
     max_score_file = max(zip(score,score_doc))
+    pp(max_score_file)
     return max_score_file[1]
+
+
 
 
 

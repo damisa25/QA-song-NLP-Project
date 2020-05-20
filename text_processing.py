@@ -10,9 +10,9 @@ from glob import glob
 from collections import Counter
 from nltk.tokenize import word_tokenize 
 from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
+from nltk.stem.snowball import SnowballStemmer
+from collections import defaultdict
 from pymongo import MongoClient
-
 
 # Create connection to MongoDB
 client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
@@ -32,7 +32,8 @@ else:
 
 nltk.download('stopwords')
 stop_word = set(stopwords.words('english'))
-lemmatizer = WordNetLemmatizer()
+stemmer = SnowballStemmer("english")
+remove = ["?", "-",".",",","'","[","]","(",")","!","``","/",";",":","‘" ]
 
 """Tokenization, Normalization, Stemming """
 def parsetexts(fileglob='Songs/T*.txt'):
@@ -42,9 +43,7 @@ def parsetexts(fileglob='Songs/T*.txt'):
         with open(txtfile, 'r') as f:
             txt = word_tokenize(f.read())   # Word tokenization
             """Stop word removal, Lowercase, Stemming"""
-            txt = [lemmatizer.lemmatize(element).lower() for element in txt if not element in stop_word ] 
-            txt = [re.sub(r'[^\w\s]', '', element) for element in txt]
-            txt = [element for element in txt if element != '']
+            txt = [stemmer.stem(element).lower() for element in txt if not element in stop_word and element not in remove] 
             words |= set(txt) #Words appear in all files
             docs[txtfile.split('/')[-1].replace('.txt', '')] = txt #Words in each text file
     return docs, words
@@ -65,13 +64,11 @@ def inverted_index_dict(docs,words):
 inverted_index = inverted_index_dict(docs,words)
 pp(inverted_index)
 
-docs_col.insert_one(docs)
-#
-# words_col.insert_one(words)
+
 """ Inserting into MongoDB """
 
-   
-"""docs_col.insert_one(docs)
-words_col.insert_one(words)
-inverted_col.insert_one(inverted_index)"""
-#except: print('This connect or insert is wrong')
+try:
+    docs_col.insert_one(docs)
+    words_col.insert_one(words)
+    inverted_col.insert_one(inverted_index)
+except: print('This connect or insert is wrong')

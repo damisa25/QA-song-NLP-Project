@@ -60,15 +60,40 @@ def pos_tagged_docs(sentences):
     return dict(pos_sentences)
 #pp(dict(infos))
 
+"""def test(dict_value,pos_question,key_s):
+    matched_index = []
+    key = []
+    for key_q, value_q in pos_question.items():
+        pp(key_q)
+        pp(value_q)
+        x = lambda : True if any(val in dict_value[key_q] for val in value_q) else False
+                #pp(bool(x))
+        x = bool(x)
+        if x == True:
+            key.append(key_s)
+            if key not in matched_index:
+                matched_index.append(key_s)
+    return matched_index"""
+
+
 def check_match_pos(pos_question, pos_sentences):
     matched_index = []
+    key = []
+    
     for key_s,value_s in pos_sentences.items():
         for value in value_s:
             dict_value = dict(value)
             #pp(dict_value)
-            for key_q,value_q in pos_question.items():
+            for key_q, value_q in pos_question.items():
+                #x = lambda : True if any(for val in value_q if val in dict_value[key_q] ) else False
+                #pp(bool(x))
                 if any(val in dict_value[key_q] for val in value_q):
-                    matched_index.append(key_s)
+                    key.append(key_s)
+                    if key not in matched_index:
+                        matched_index.append(key_s)
+            
+            #matched_index = test(dict_value,pos_question,key_s)
+    pp(matched_index)
 
     return matched_index
 
