@@ -14,7 +14,7 @@ docs_col = db.docs_db
 words_col = db.words_db
 inverted_col = db.invertedIndex_db
 
-question = "What is the lengths of Yummy?" #Example
+question = "Who is the songwriter of Yummy?" #Example
 
 extracted_keywords, pos_question = question_preprocessing.extract_keys(question)
 #pp(extracted_keywords)
@@ -45,7 +45,7 @@ def main():
     if not term:
         pp('Please give more informations')
         sys.exit()
-
+    
     filename_extracted = question_preprocessing.file_reranking(extracted_keywords,terms,words,docs,inverted_index)
     answer = answer_extraction.answer_extraction(question, pos_question, filename_extracted )
     pp(answer)

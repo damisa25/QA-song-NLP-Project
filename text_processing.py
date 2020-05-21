@@ -13,6 +13,7 @@ from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 from collections import defaultdict
 from pymongo import MongoClient
+from nltk.stem import WordNetLemmatizer
 
 # Create connection to MongoDB
 client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
@@ -31,9 +32,10 @@ else:
 
 
 nltk.download('stopwords')
+lemmatizer = WordNetLemmatizer()
 stop_word = set(stopwords.words('english'))
 stemmer = SnowballStemmer("english")
-remove = ["?", "-",".",",","'","[","]","(",")","!","``","/",";",":","‘" ]
+remove = ["?", "-",".",",","'","[","]","(",")","!","``","/",";",":","‘","''" ]
 
 """Tokenization, Normalization, Stemming """
 def parsetexts(fileglob='Songs/T*.txt'):
@@ -42,13 +44,19 @@ def parsetexts(fileglob='Songs/T*.txt'):
     for txtfile in glob(fileglob):
         with open(txtfile, 'r') as f:
             txt = word_tokenize(f.read())   # Word tokenization
+            """pp('Word Tokenization')
+            pp(txt)"""
             """Stop word removal, Lowercase, Stemming"""
-            txt = [stemmer.stem(element).lower() for element in txt if not element in stop_word and element not in remove] 
+            txt = [element.lower() for element in txt if not element in stop_word and element not in remove and '.' not in element] 
+            txt=  [lemmatizer.lemmatize(ele) for ele in txt]
+            """pp('Stop word removal and Stemming')
+            pp(txt)"""
             words |= set(txt) #Words appear in all files
             docs[txtfile.split('/')[-1].replace('.txt', '')] = txt #Words in each text file
     return docs, words
 
 docs, words = parsetexts()
+#pp(docs)
 words = dict.fromkeys(words, 0)  #
 
 """ Index term dictionary """
@@ -61,7 +69,7 @@ def inverted_index_dict(docs,words):
     return inverted_index
 
 inverted_index = inverted_index_dict(docs,words)
-pp(inverted_index)
+#pp(inverted_index)
 
 
 """ Inserting into MongoDB """

@@ -79,7 +79,6 @@ def pos_tagged_docs(sentences):
 def check_match_pos(pos_question, pos_sentences):
     matched_index = []
     key = []
-    
     for key_s,value_s in pos_sentences.items():
         for value in value_s:
             dict_value = dict(value)
@@ -108,6 +107,7 @@ def answer_extraction(question, pos_question, filename_extracted ):
     
     ner_question, ner_sentences = named_entities(question, sentences)
     pos_sentences = pos_tagged_docs(sentences)
+    pp(pos_question)
     matched_index = check_match_pos(pos_question, pos_sentences)
     """ Extract Answer """
     if len(matched_index) > 1:
