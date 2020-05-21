@@ -31,18 +31,19 @@ remove = ["?", "-",".",",","'","[","]","(",")","!","``","/",";",":","‘" ]
 def extract_keys(question):
     """ Keywords """
     tokens_keywords = word_tokenize(question)
-    """extracted_keywords_index = [stemmer.stem(element).lower() for element in tokens_keywords 
-                            if element not in stop_word and element not in remove and element not in q_words] """
+    extracted_keywords_index = [lemmatizer.lemmatize(element.lower()) for element in tokens_keywords 
+                            if element not in stop_word and element not in remove and element not in q_words]
   
     """ POS tagging answer """
-    extracted_keywords_ans = [element.lower() for element in tokens_keywords 
+    extracted_keywords_ans = [lemmatizer.lemmatize(element) for element in tokens_keywords 
                             if element not in stop_word and element not in remove and element not in q_words]   
-    extracted_keywords_ans = [lemmatizer.lemmatize(element) for element in extracted_keywords_ans]
+    #extracted_keywords_ans = [lemmatizer.lemmatize(element) for element in extracted_keywords_ans]
     pos_question = defaultdict(list)
     for value, tag in nltk.pos_tag(extracted_keywords_ans, tagset='universal'):
+        value = value.lower()
         pos_question[tag].append(value)
 
-    return extracted_keywords_ans, dict(pos_question)
+    return extracted_keywords_index, dict(pos_question)
     
    
 """ Document Retrieval : matching keywords  from question with words from MongoDB"""

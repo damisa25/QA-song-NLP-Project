@@ -16,12 +16,12 @@ from pymongo import MongoClient
 from nltk.stem import WordNetLemmatizer
 
 # Create connection to MongoDB
-client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
+"""client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
 
 db = client.db
 docs_col = db.docs_db
 words_col = db.words_db
-inverted_col = db.invertedIndex_db
+inverted_col = db.invertedIndex_db"""
 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
@@ -74,8 +74,8 @@ inverted_index = inverted_index_dict(docs,words)
 
 """ Inserting into MongoDB """
 
-try:
+"""try:
     docs_col.insert_one(docs)
     words_col.insert_one(words)
     inverted_col.insert_one(inverted_index)
-except: print('This connect or insert is wrong')
+except: print('This connect or insert is wrong')"""

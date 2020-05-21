@@ -4,6 +4,7 @@ import sys
 import certifi
 from pymongo import MongoClient
 from pprint import pprint as pp
+from collections import defaultdict
 import uuid
 """ Create connection to MongoDB database """
 
@@ -14,7 +15,7 @@ docs_col = db.docs_db
 words_col = db.words_db
 inverted_col = db.invertedIndex_db
 
-question = "Who is the songwriter of Yummy?" #Example
+question = "What is the lengths of Yummy?" #Example
 
 extracted_keywords, pos_question = question_preprocessing.extract_keys(question)
 #pp(extracted_keywords)
@@ -47,7 +48,12 @@ def main():
         sys.exit()
     
     filename_extracted = question_preprocessing.file_reranking(extracted_keywords,terms,words,docs,inverted_index)
-    answer = answer_extraction.answer_extraction(question, pos_question, filename_extracted )
+    pos_question_check = defaultdict(list)
+    for tag,value in pos_question.items():
+        for v in value:
+            if v in docs[filename_extracted]:
+                pos_question_check[tag].append(v)
+    answer = answer_extraction.answer_extraction(question, dict(pos_question_check), filename_extracted )
     pp(answer)
     #pp(filename_extracted)
 

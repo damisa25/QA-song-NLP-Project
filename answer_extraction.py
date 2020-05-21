@@ -2,12 +2,12 @@
 import nltk 
 import re
 import spacy 
-from nltk.stem import WordNetLemmatizer
+
 from pprint import pprint as pp
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 from collections import defaultdict, Counter
-
+from nltk.stem import WordNetLemmatizer
 import ssl
 try:
     _create_unverified_https_context = ssl._create_unverified_context
@@ -17,8 +17,10 @@ else:
     ssl._create_default_https_context = _create_unverified_https_context
 
 ne = spacy.load('en_core_web_sm')
+lemmatizer = WordNetLemmatizer()
 nltk.download('stopwords')
 q_words = ['What', 'Where', 'When', 'Who', 'Why', 'How','what', 'where', 'when', 'who', 'why', 'how']
+remove = ["?", "-",".",",","'","[","]","(",")","!","``","/",";",":","‘" ]
 stop_word = set(stopwords.words('english'))
 
 
@@ -43,6 +45,7 @@ def named_entities(question, sentences):
     return ner_question,ner_sentence
 
 def pos_tagged_docs(sentences):
+
     lemmatizer = WordNetLemmatizer()
     pos_sentences = defaultdict(list)
     pos_words = defaultdict(list)
@@ -51,7 +54,8 @@ def pos_tagged_docs(sentences):
         for sent in nltk.sent_tokenize(sentence):
             text = nltk.word_tokenize(sent)
             for value, tag in nltk.pos_tag(text, tagset='universal'):
-                if value not in stop_word and '.' not in value and ',' not in value and value not in q_words:
+                if value not in stop_word and '.' not in value and ',' not in value and value not in q_words and value not in remove:    
+                    value = value.lower()
                     pos_words[tag].append(lemmatizer.lemmatize(value))
         pos_sentences[i].append(dict(pos_words))
         pos_words = defaultdict(list)
@@ -60,20 +64,20 @@ def pos_tagged_docs(sentences):
     return dict(pos_sentences)
 #pp(dict(infos))
 
-"""def test(dict_value,pos_question,key_s):
+def second_match_pos(dict_value,pos_question,key_s):
     matched_index = []
     key = []
     for key_q, value_q in pos_question.items():
-        pp(key_q)
-        pp(value_q)
-        x = lambda : True if any(val in dict_value[key_q] for val in value_q) else False
-                #pp(bool(x))
-        x = bool(x)
-        if x == True:
+        match = lambda : True if not any(val in dict_value[key_q] for val in value_q) else False
+        match = bool(match)
+        if match == True:
             key.append(key_s)
-            if key not in matched_index:
-                matched_index.append(key_s)
-    return matched_index"""
+            for k in key:
+                if k not in matched_index:
+                    matched_index.append(key_s)
+   
+    #pp(matched_index)
+    return matched_index
 
 
 def check_match_pos(pos_question, pos_sentences):
@@ -82,32 +86,33 @@ def check_match_pos(pos_question, pos_sentences):
     for key_s,value_s in pos_sentences.items():
         for value in value_s:
             dict_value = dict(value)
-            #pp(dict_value)
-            for key_q, value_q in pos_question.items():
-                #x = lambda : True if any(for val in value_q if val in dict_value[key_q] ) else False
-                #pp(bool(x))
-                if any(val in dict_value[key_q] for val in value_q):
-                    key.append(key_s)
-                    if key not in matched_index:
-                        matched_index.append(key_s)
-            
-            #matched_index = test(dict_value,pos_question,key_s)
-    pp(matched_index)
+            try:
+                for key_q, value_q in pos_question.items():
+                    if all(val in dict_value[key_q] for val in value_q):
+                        key.append(key_s)
+                        for k in key:
+                            if k not in matched_index:
+                                matched_index.append(key_s)
+            except KeyError:
+                matched_index = second_match_pos(dict_value,pos_question,key_s)
+
+    #pp(matched_index)
 
     return matched_index
 
 
 """ Matched POS tagging and check Named Entity"""
-def answer_extraction(question, pos_question, filename_extracted ):
-
+def answer_extraction(question, pos_question, filename_extracted):
+    global counter
     with open('Songs/'+filename_extracted+'.txt', 'r') as f:
         doc = f.read()
 
-    sentences = nltk.sent_tokenize(doc)
     
+    sentences = nltk.sent_tokenize(doc)
+    #pp(sentences)
     ner_question, ner_sentences = named_entities(question, sentences)
     pos_sentences = pos_tagged_docs(sentences)
-    pp(pos_question)
+ 
     matched_index = check_match_pos(pos_question, pos_sentences)
     """ Extract Answer """
     if len(matched_index) > 1:
@@ -115,11 +120,16 @@ def answer_extraction(question, pos_question, filename_extracted ):
         most_ne = []
         for index in matched_index:
             matched_sentence_ne = ner_sentences[index]
+            lyric = 'lyrics'
+            if lyric in sentences[index]:
+                ans_lyric = sentences[index:]
+                ans_lyric = "\n".join(ans_lyric)
+                return ans_lyric  
             if any(ne_word in matched_sentence_ne for ne_word in ner_question):
                 for m in matched_sentence_ne:
                     most_ne.append(m[1])
-                Counter = Counter(most_ne)
-                most_ne_occur = [word for word, words in Counter.most_common(1)]
+                counter = Counter(most_ne)
+                most_ne_occur = [word for word, words in counter.most_common(1)]
                 for j in matched_sentence_ne:
                     if j[1] in most_ne_occur:
                         ans_ne.append(j[0])
