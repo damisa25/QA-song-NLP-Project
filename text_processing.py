@@ -56,9 +56,8 @@ def inverted_index_dict(docs,words):
     inverted_index = {}  
     for word in words:
         for txt, wrds in docs.items():
-            for wrdindx in (i for i,w in enumerate(wrds) if word==w):
-                if word in wrds:
-                    inverted_index.setdefault(word, []).append((txt, wrdindx))
+            if word in wrds:
+                inverted_index.setdefault(word, []).append(txt)
     return inverted_index
 
 inverted_index = inverted_index_dict(docs,words)
