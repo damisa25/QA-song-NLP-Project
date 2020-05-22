@@ -109,7 +109,6 @@ def answer_extraction(question, pos_question, filename_extracted):
 
     
     sentences = nltk.sent_tokenize(doc)
-    #pp(sentences)
     ner_question, ner_sentences = named_entities(question, sentences)
     pos_sentences = pos_tagged_docs(sentences)
  

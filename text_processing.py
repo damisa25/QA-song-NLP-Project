@@ -16,12 +16,12 @@ from pymongo import MongoClient
 from nltk.stem import WordNetLemmatizer
 
 # Create connection to MongoDB
-"""client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://dbDamisa:damisa.25@nlp-ipjo1.mongodb.net/test?retryWrites=true&w=majority')
 
 db = client.db
 docs_col = db.docs_db
 words_col = db.words_db
-inverted_col = db.invertedIndex_db"""
+inverted_col = db.invertedIndex_db
 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
@@ -49,8 +49,8 @@ def parsetexts(fileglob='Songs/T*.txt'):
             """Stop word removal, Lowercase, Stemming"""
             txt = [element.lower() for element in txt if not element in stop_word and element not in remove and '.' not in element] 
             txt=  [lemmatizer.lemmatize(ele) for ele in txt]
-            """pp('Stop word removal and Stemming')
-            pp(txt)"""
+            pp('Stop word removal and Lemmatization')
+            pp(txt)
             words |= set(txt) #Words appear in all files
             docs[txtfile.split('/')[-1].replace('.txt', '')] = txt #Words in each text file
     return docs, words
@@ -69,13 +69,13 @@ def inverted_index_dict(docs,words):
     return inverted_index
 
 inverted_index = inverted_index_dict(docs,words)
-#pp(inverted_index)
+pp(inverted_index)
 
 
 """ Inserting into MongoDB """
 
-"""try:
+try:
     docs_col.insert_one(docs)
     words_col.insert_one(words)
     inverted_col.insert_one(inverted_index)
-except: print('This connect or insert is wrong')"""
+except: print('This connect or insert is wrong')
