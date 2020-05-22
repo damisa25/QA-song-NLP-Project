@@ -227,6 +227,16 @@
 .reset:hover {
         background  : #eee0ff; /*แก้เพิ่ม*/
       }
+.answer2{
+  /* ANSWER */
+  color: #9F92BA;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 0px;
+  margin-left: 264px;
+  }
 
 .answer{
     /* float               : center;
@@ -239,24 +249,15 @@
     margin-top          : 30px;
     margin-left         : 275px; */
 
-    /* ANSWER */
-    color: #9F92BA;
-    font-family: Poppins;
-    font-weight: 500;
-    font-size: 24px;
-    text-align: center;
-    margin-top: 0px;
-    margin-left: 264px;
-
 
     /* box */
     position: absolute;
     width: 1080px;
     height: 421px;
-    left: 180px;
-    top: 545px;
+    /* left: 180px;
+    top: 1000px; */
+    background-position: center;
     background: rgba(210, 209, 236, 0.18);
     border: 2px solid rgba(104, 102, 200, 0.28);
     border-radius: 30px;
-
 }
