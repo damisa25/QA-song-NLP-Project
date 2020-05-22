@@ -72,9 +72,6 @@ def second_match_pos(dict_value,pos_question,key_s):
         match = bool(match)
         if match == True:
             key.append(key_s)
-            for k in key:
-                if k not in matched_index:
-                    matched_index.append(key_s)
    
     #pp(matched_index)
     return matched_index
@@ -90,13 +87,10 @@ def check_match_pos(pos_question, pos_sentences):
                 for key_q, value_q in pos_question.items():
                     if all(val in dict_value[key_q] for val in value_q):
                         key.append(key_s)
-                        for k in key:
-                            if k not in matched_index:
-                                matched_index.append(key_s)
             except KeyError:
-                matched_index = second_match_pos(dict_value,pos_question,key_s)
-
-    #pp(matched_index)
+                key = second_match_pos(dict_value,pos_question,key_s)
+    counter1 = Counter(key)
+    matched_index = [item for item, count in counter1.most_common(1)]
 
     return matched_index
 
@@ -104,11 +98,12 @@ def check_match_pos(pos_question, pos_sentences):
 """ Matched POS tagging and check Named Entity"""
 def answer_extraction(question, pos_question, filename_extracted):
     global counter
-    with open('Songs/'+filename_extracted+'.txt', 'r') as f:
+    with open('songs/'+filename_extracted+'.txt', 'r') as f:
         doc = f.read()
 
     
     sentences = nltk.sent_tokenize(doc)
+
     ner_question, ner_sentences = named_entities(question, sentences)
     pos_sentences = pos_tagged_docs(sentences)
  

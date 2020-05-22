@@ -20,62 +20,11 @@ questions = ["What is the lengths of Yummy?",
             "What is the genre of Yummy?", 
             "Who is the songwriter of Yummy", 
             "When was Yummy released?", 
-            "Who is the music copyright owner of Yummy?",
+            "Who is the song copyright owner of Yummy?",
             "Who is the record label of Yummy?",
             "What is the lyrics of Yummy?",
             "What is the album of Yummy?",
-            "What is the nationality of the singer that is the owner of Yummy?",
-            "What is the lengths of Comethru?", #20
-            "Who is the artist of Comethru?",
-            "What is the genre of Comethru?", 
-            "Who is the songwriter of Comethru", 
-            "When was Comethru released?", 
-            "Who is the music copyright owner of Comethru?",
-            "Who is the record label of Comethru?",
-            "What is the lyrics of Comethru?",
-            "What is the album of Comethru?",
-            "What is the nationality of the singer that is the owner of Comethru?",
-            "What is the lengths of Life of the Party?", ##30
-            "Who is the singer of Life of the Party?",
-            "What is the genre of Life of the Party?", 
-            "Who is the songwriter of Life of the Party", 
-            "When was Comethru released?", 
-            "Who is the music copyright owner of Life of the Party?",
-            "Who is the record label of Life of the Party?",
-            "What is the lyrics of Life of the Party?",
-            "What is the album of Life of the Party?",
-            "What is the nationality of the singer that is the owner of Life of the Party?",
-            "What is the lengths of Change?", ##40
-            "Who is the singer of Change?",
-            "What is the genre of Change?", 
-            "Who is the songwriter of Change", 
-            "When was Comethru released?", 
-            "Who is the music copyright owner of Change?",
-            "Who is the record label of Change?",
-            "What is the lyrics of Change?",
-            "What is the album of Change?",
-            "What is the nationality of the singer that is the owner of Change?",
-            #ยังไม่ได้เปลี่ยนชื่อเพลง
-            "What is the lengths of Change?", ##50
-            "Who is the singer of Change?",
-            "What is the genre of Change?", 
-            "Who is the songwriter of Change", 
-            "When was Comethru released?", 
-            "Who is the music copyright owner of Change?",
-            "Who is the record label of Change?",
-            "What is the lyrics of Change?",
-            "What is the album of Change?",
-            "What is the nationality of the singer that is the owner of Change?",
-            "What is the lengths of Change?", #60
-            "Who is the singer of Change?",
-            "What is the genre of Change?", 
-            "Who is the songwriter of Change", 
-            "When was Comethru released?", 
-            "Who is the music copyright owner of Change?",
-            "Who is the record label of Change?",
-            "What is the lyrics of Change?",
-            "What is the album of Change?",
-            "What is the nationality of the singer that is the owner of Change?",] #Example
+            "What is the nationality of the singer that is the owner of Yummy?"] #Example
 
 
 
@@ -101,10 +50,12 @@ def main():
    
     for question in questions:
         extracted_keywords, pos_question = question_preprocessing.extract_keys(question)
+        pp(extracted_keywords)
         terms =[]
         for term in extracted_keywords:
             if term in words:
                 terms.append(term)
+        pp(terms)
         if not term:
             print('\nAnswer of\t'+question+'\n')
             pp('Please give more informations')
