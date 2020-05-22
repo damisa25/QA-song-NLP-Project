@@ -72,7 +72,10 @@ def second_match_pos(dict_value,pos_question,key_s):
         match = bool(match)
         if match == True:
             key.append(key_s)
-   
+            for k in key:
+                if k not in matched_index:
+                    matched_index.append(key_s)
+    
     #pp(matched_index)
     return matched_index
 
@@ -87,10 +90,12 @@ def check_match_pos(pos_question, pos_sentences):
                 for key_q, value_q in pos_question.items():
                     if all(val in dict_value[key_q] for val in value_q):
                         key.append(key_s)
+                        for k in key:
+                            if k not in matched_index:
+                                matched_index.append(key_s)
             except KeyError:
-                key = second_match_pos(dict_value,pos_question,key_s)
-    counter1 = Counter(key)
-    matched_index = [item for item, count in counter1.most_common(1)]
+                matched_index = second_match_pos(dict_value,pos_question,key_s)
+    
 
     return matched_index
 
